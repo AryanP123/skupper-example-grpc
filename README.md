@@ -2,7 +2,7 @@
 
 # Skupper Online Boutique
 
-[![main](https://github.com/c-kruse/skupper-example-grpc/actions/workflows/main.yaml/badge.svg)](https://github.com/c-kruse/skupper-example-grpc/actions/workflows/main.yaml)
+[![main](https://github.com/pwright/skupper-example-grpc/actions/workflows/main.yaml/badge.svg)](https://github.com/pwright/skupper-example-grpc/actions/workflows/main.yaml)
 
 #### A Cloud-Native gRPC microservice-based application deployed across multiple Kubernetes clusters using Skupper
 
