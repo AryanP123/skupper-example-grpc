@@ -30,10 +30,10 @@ spec:
           ports:
           - containerPort: 5050
           readinessProbe:
-            tcpSocket:
+            grpc:
               port: 5050
           livenessProbe:
-            tcpSocket:
+            grpc:
               port: 5050
           env:
           - name: PORT
@@ -81,12 +81,12 @@ spec:
           value: "redis-cart:6379"
         readinessProbe:
           initialDelaySeconds: 15
-          tcpSocket:
+          grpc:
             port: 7070
         livenessProbe:
           initialDelaySeconds: 15
           periodSeconds: 10
-          tcpSocket:
+          grpc:
             port: 7070
 ---
 apiVersion: apps/v1
@@ -119,10 +119,10 @@ spec:
         - name: DISABLE_DEBUGGER
           value: "1"
         readinessProbe:
-          tcpSocket:
+          grpc:
             port: 7000
         livenessProbe:
-          tcpSocket:
+          grpc:
             port: 7000
 ---
 apiVersion: apps/v1
@@ -187,10 +187,10 @@ spec:
         readinessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
-          tcpSocket:
+          grpc:
             port: 9555
         livenessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
-          tcpSocket:
+          grpc:
             port: 9555

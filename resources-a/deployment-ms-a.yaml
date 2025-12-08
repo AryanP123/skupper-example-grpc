@@ -32,11 +32,11 @@ spec:
         - containerPort: 8080
         readinessProbe:
           periodSeconds: 5
-          tcpSocket:
+          grpc:
             port: 8080
         livenessProbe:
           periodSeconds: 5
-          tcpSocket:
+          grpc:
             port: 8080
         env:
         - name: PORT
@@ -169,8 +169,12 @@ spec:
         - name: DISABLE_PROFILER
           value: "1"
         readinessProbe:
-          tcpSocket:
+          grpc:
             port: 3550
+          initialDelaySeconds: 15
+          periodSeconds: 10
         livenessProbe:
-          tcpSocket:
+          grpc:
             port: 3550
+          initialDelaySeconds: 15
+          periodSeconds: 10
