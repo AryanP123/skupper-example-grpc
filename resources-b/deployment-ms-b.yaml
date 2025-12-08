@@ -26,15 +26,15 @@ spec:
     spec:
       containers:
         - name: server
-          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.5.0
+          image: us-central1-docker.pkg.dev/google-samples/microservices-demo/checkoutservice:v0.10.4
           ports:
           - containerPort: 5050
           readinessProbe:
-            exec:
-              command: ["/bin/grpc_health_probe", "-addr=:5050"]
+            tcpSocket:
+              port: 5050
           livenessProbe:
-            exec:
-              command: ["/bin/grpc_health_probe", "-addr=:5050"]
+            tcpSocket:
+              port: 5050
           env:
           - name: PORT
             value: "5050"
@@ -45,7 +45,7 @@ spec:
           - name: PAYMENT_SERVICE_ADDR
             value: "paymentservice:50051"
           - name: EMAIL_SERVICE_ADDR
-            value: "emailservice:5000"
+            value: "emailservice:8080"
           - name: CURRENCY_SERVICE_ADDR
             value: "currencyservice:7000"
           - name: CART_SERVICE_ADDR
@@ -73,7 +73,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/cartservice:v0.5.0
+        image: us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice:v0.10.4
         ports:
         - containerPort: 7070
         env:
@@ -81,13 +81,13 @@ spec:
           value: "redis-cart:6379"
         readinessProbe:
           initialDelaySeconds: 15
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+          tcpSocket:
+            port: 7070
         livenessProbe:
           initialDelaySeconds: 15
           periodSeconds: 10
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+          tcpSocket:
+            port: 7070
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -105,7 +105,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.5.0
+        image: us-central1-docker.pkg.dev/google-samples/microservices-demo/currencyservice:v0.10.4
         ports:
         - name: grpc
           containerPort: 7000
@@ -119,11 +119,11 @@ spec:
         - name: DISABLE_DEBUGGER
           value: "1"
         readinessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+          tcpSocket:
+            port: 7000
         livenessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+          tcpSocket:
+            port: 7000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -174,7 +174,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.5.0
+        image: us-central1-docker.pkg.dev/google-samples/microservices-demo/adservice:v0.10.4
         ports:
         - containerPort: 9555
         env:
@@ -187,10 +187,10 @@ spec:
         readinessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+          tcpSocket:
+            port: 9555
         livenessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+          tcpSocket:
+            port: 9555

@@ -27,17 +27,17 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.5.0
+        image: us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice:v0.10.4
         ports:
         - containerPort: 8080
         readinessProbe:
           periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+          tcpSocket:
+            port: 8080
         livenessProbe:
           periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+          tcpSocket:
+            port: 8080
         env:
         - name: PORT
           value: "8080"
@@ -67,7 +67,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: gcr.io/google-samples/microservices-demo/frontend:v0.5.0
+          image: us-central1-docker.pkg.dev/google-samples/microservices-demo/frontend:v0.10.4
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -103,6 +103,8 @@ spec:
             value: "checkoutservice:5050"
           - name: AD_SERVICE_ADDR
             value: "adservice:9555"
+          - name: SHOPPING_ASSISTANT_SERVICE_ADDR
+            value: "shoppingassistant:80"
           # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp 
           # - name: ENV_PLATFORM 
@@ -154,7 +156,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.5.0
+        image: us-central1-docker.pkg.dev/google-samples/microservices-demo/productcatalogservice:v0.10.4
         ports:
         - containerPort: 3550
         env:
@@ -167,8 +169,8 @@ spec:
         - name: DISABLE_PROFILER
           value: "1"
         readinessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+          tcpSocket:
+            port: 3550
         livenessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+          tcpSocket:
+            port: 3550

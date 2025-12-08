@@ -3,7 +3,7 @@ kind: Connector
 metadata:
   name: emailservice
 spec:
-  port: 5000
+  port: 8080
   routingKey: emailservice
   selector: app=emailservice
   type: tcp
@@ -29,4 +29,3 @@ spec:
   routingKey: shippingservice
   selector: app=shippingservice
   type: tcp
-
