@@ -42,26 +42,6 @@ spec:
 apiVersion: skupper.io/v2alpha1
 kind: Listener
 metadata:
-  name: productcatalogservice
-spec:
-  host: productcatalogservice
-  port: 3550
-  routingKey: productcatalogservice
-  type: tcp
----
-apiVersion: skupper.io/v2alpha1
-kind: Listener
-metadata:
-  name: recommendationservice
-spec:
-  host: recommendationservice
-  port: 8080
-  routingKey: recommendationservice
-  type: tcp
----
-apiVersion: skupper.io/v2alpha1
-kind: Listener
-metadata:
   name: shippingservice
 spec:
   host: shippingservice

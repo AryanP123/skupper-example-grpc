@@ -2,26 +2,6 @@
 apiVersion: skupper.io/v2alpha1
 kind: Listener
 metadata:
-  name: cartservice
-spec:
-  host: cartservice
-  port: 7070
-  routingKey: cartservice
-  type: tcp
----
-apiVersion: skupper.io/v2alpha1
-kind: Listener
-metadata:
-  name: currencyservice
-spec:
-  host: currencyservice
-  port: 7000
-  routingKey: currencyservice
-  type: tcp
----
-apiVersion: skupper.io/v2alpha1
-kind: Listener
-metadata:
   name: emailservice
 spec:
   host: emailservice
@@ -37,16 +17,6 @@ spec:
   host: paymentservice
   port: 50051
   routingKey: paymentservice
-  type: tcp
----
-apiVersion: skupper.io/v2alpha1
-kind: Listener
-metadata:
-  name: redis-cart
-spec:
-  host: redis-cart
-  port: 6379
-  routingKey: redis-cart
   type: tcp
 ---
 apiVersion: skupper.io/v2alpha1
